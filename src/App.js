@@ -5,9 +5,14 @@ import {Helmet} from 'react-helmet';
 import TodoItemList from './components/TodoItemList';
 import Pallet from "./components/Pallet";
 
+
+const colors = ['#343a40', '#f03e3e', '#12b886', '#228ae6'];
+
+
 class App extends Component {
 
     id = 3 //이미 0,1,2가 존재하므로 3으로 설정 
+
 
     state = { 
       input: '',
@@ -16,13 +21,10 @@ class App extends Component {
         { id : 1, text : 'React', checked:true},
         { id : 2, text : 'TodoList', checked:false}
       ],
-      colors : [
-        {id : 0 ,color : '#343a40'}, 
-        {id: 1 , color : '#f03e3e'},
-        {id: 2 , color: '#12b886'},
-        {id: 3, color : '#228ae6'}
-      ]
+      color : '#343a40'
     }
+
+   
 
     handleRemove = (id) => {
       const { todos } = this.state;
@@ -32,6 +34,8 @@ class App extends Component {
       });
 
     }
+
+
     
     handleToggle = (id) => {
       const { todos } = this.state;
@@ -62,19 +66,27 @@ class App extends Component {
     }
 
     handleCreate = () => {
-      const {input, todos} = this.state;
+      const {input, todos,color} = this.state;
       this.setState({
         input : '', //인풋을 비운다 
         //concat을 사용하여 배열에 추가함 
         todos: todos.concat({
           id:this.id++,
           text:input,
-          checked:false
+          checked:false,
+          color:color
         })
 
       });
 
     }
+
+    handleSelectColor = (color) => {
+      this.setState({
+        color
+      })
+    }
+
 
     handleKeyPress = (e) => {
       //눌려진 키가 Enter면 handleCreate 호출 
@@ -85,11 +97,12 @@ class App extends Component {
   
   
   render() {
-      const {input, todos, colors} = this.state;
+      const {input, todos, color} = this.state;
       const {
         handleChange,
         handleCreate,
-        handleKeyPress
+        handleKeyPress,
+        handleSelectColor
       } = this;
 
 
@@ -104,8 +117,8 @@ class App extends Component {
           </Helmet>
           
 
-          <TodoListTemplate form={<Form  value={input} onKeyPress={handleKeyPress} onChange={handleChange} onCreate={handleCreate} />}
-                pallet =  {<Pallet colors={colors} key="100" />}>
+          <TodoListTemplate form={<Form color={color} value={input} onKeyPress={handleKeyPress} onChange={handleChange} onCreate={handleCreate} />}
+                pallet =  {<Pallet  colors={colors} selected={color} onSelect={handleSelectColor} />}>
             <TodoItemList todos={todos} onToggle={this.handleToggle} onRemove={this.handleRemove} />
           </TodoListTemplate>
           
