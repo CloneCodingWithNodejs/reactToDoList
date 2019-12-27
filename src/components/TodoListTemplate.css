@@ -1,0 +1,31 @@
+@font-face{
+  font-family: 'nanums';
+  src:url('../fonts/NanumSquare_acB.ttf') format('truetype');
+}
+
+body {
+  font-family:nanums !important;
+}
+
+#header{
+
+ display: flex;
+ height: 200px;
+ background: #bac8ff;
+ margin-top: 100px; 
+ justify-content: center;
+ align-items: center;
+ 
+}
+
+#title{
+ color: white;
+ font-size: 25pt;
+ font-weight: bold;
+}
+
+#middle{
+  margin-top: 10px; 
+  padding: 0;
+}
+
