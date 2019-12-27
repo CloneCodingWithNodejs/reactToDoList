@@ -1,0 +1,14 @@
+.colorBox{
+   opacity: 0.75;
+   min-width: 60px;
+   min-height: 60px;
+   margin-right: 50px;
+   cursor: pointer;
+}
+
+.colorBox:hover {
+    opacity: 1;
+  }
+
+
+
